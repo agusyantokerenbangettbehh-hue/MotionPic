@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MotionPic - Buat foto mu menjadi live</title>
+  <link rel="icon" href="assets/logo.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="container header-isi">
+      <a class="logo" href="#beranda">
+        <img src="assets/logo.svg" width="40" height="40" alt="logo">
+        Motion<span>Pic</span>
+      </a>
+
+      <nav class="menu" id="menu">
+        <a href="#beranda">Beranda</a>
+        <a href="#fitur">Fitur</a>
+        <a href="#studio">Cara Pakai</a>
+        <a href="#tentang">Tentang</a>
+        <a href="#admin" id="menu-admin" style="display:none">Admin</a>
+      </nav>
+
+      <div class="header-kanan">
+        <button class="tombol-tema" id="tombol-masuk">Masuk</button>
+        <button class="tombol-tema" id="tema">Tema</button>
+        <a class="btn kecil" href="#studio">Mulai Sekarang</a>
+        <button class="tombol-menu" id="tombol-menu">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="beranda">
+    <div class="container hero-isi">
+
+      <div class="hero-teks">
+        <span class="badge">Foto Live &bull; Lebih Hidup dari Foto Biasa</span>
+        <h1>Buat foto mu menjadi <span class="merah">live</span></h1>
+        <p>Ubah video biasa menjadi Foto Live dengan efek hidup yang memukau, mirip seperti Live Photo di iPhone.</p>
+        <a class="btn" href="#studio">&#9654; Mulai Sekarang</a>
+        <a class="btn garis" href="#fitur">Pelajari Lebih Lanjut</a>
+      </div>
+
+      <div class="hero-gambar">
+        <div class="foto">
+          <span class="label-live">Live Photo</span>
+          <a class="tombol-play" href="#studio">&#9654;</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== FITUR ===== -->
+  <section class="bagian" id="fitur">
+    <div class="container">
+      <h2 class="judul">Kenapa Pilih <span class="merah">MotionPic?</span></h2>
+      <p class="sub">Karena kami memberikan pengalaman terbaik untuk menghidupkan foto kamu.</p>
+
+      <div class="daftar-fitur">
+        <div class="kartu">
+          <div class="ikon">&#9889;</div>
+          <h3>Proses Instan</h3>
+          <p>Ubah foto dalam hitungan detik.</p>
+        </div>
+        <div class="kartu">
+          <div class="ikon">&#128444;</div>
+          <h3>Kualitas Tinggi</h3>
+          <p>Hasil jernih dan natural.</p>
+        </div>
+        <div class="kartu">
+          <div class="ikon">&#128241;</div>
+          <h3>Support Semua Perangkat</h3>
+          <p>Bisa digunakan di HP, Tablet, dan PC.</p>
+        </div>
+        <div class="kartu">
+          <div class="ikon">&#128274;</div>
+          <h3>Privasi Terjaga</h3>
+          <p>Foto kamu aman, tidak disimpan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STUDIO (alat pembuat foto live) ===== -->
+  <section class="bagian" id="studio">
+    <div class="container">
+      <h2 class="judul">Cara Pakai</h2>
+      <p class="sub">1. Pilih video &nbsp; 2. Atur bagian &nbsp; 3. Simpan</p>
+
+      <label class="pilih" id="pick">
+        <input type="file" id="file" accept="video/*">
+        Klik di sini untuk pilih video (atau seret file ke sini)
+      </label>
+
+      <div class="studio hide" id="ed">
+
+        <div class="studio-kiri">
+          <div class="stage" id="stage">
+            <canvas id="cv"></canvas>
+            <video id="vid" playsinline muted preload="auto"></video>
+            <span class="tag">LIVE</span>
+          </div>
+          <p class="hint">Tahan gambar untuk memutar klip.</p>
+        </div>
+
+        <div class="studio-kanan">
+          <div class="tl"><div class="win" id="win"></div><div class="pin" id="pin"></div></div>
+          <div class="tm"><span>0s</span><span id="tot"></span></div>
+
+          <p>Mulai klip: <b id="vs"></b></p>
+          <input type="range" id="start" min="0" max="1" step="0.05" value="0">
+
+          <p>Durasi:</p>
+          <select id="len">
+            <option value="1.5">1,5 detik</option>
+            <option value="3" selected>3 detik</option>
+            <option value="5">5 detik</option>
+          </select>
+
+          <p>Frame sampul: <b id="cs"></b></p>
+          <input type="range" id="cover" min="0" max="1" step="0.02" value="0.5">
+
+          <p><label><input type="checkbox" id="aud"> Pakai suara (terdengar saat proses simpan)</label></p>
+
+          <button class="btn act lebar" id="bm">Simpan Motion Photo (Android)</button>
+          <button class="btn garis act" id="bc">Sampul JPG</button>
+          <button class="btn garis act" id="bv">Klip video</button>
+          <button class="btn garis" id="nw">Ganti video</button>
+
+          <div class="pgw hide" id="pgw"><div id="pg"></div></div>
+          <p class="hint" id="msg"></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PANEL ADMIN (hanya muncul untuk akun admin) ===== -->
+  <section class="bagian" id="admin" style="display:none">
+    <div class="container">
+      <h2 class="judul">Panel <span class="merah">Admin</span></h2>
+      <p class="sub" id="info-role"></p>
+
+      <div class="kotak-admin">
+        <h3>Durasi Klip Paling Lama</h3>
+        <p>Batas ini berlaku untuk pilihan durasi di bagian Cara Pakai.</p>
+        <input type="number" id="maks-input" min="1" max="60" step="0.5"> detik
+        <button class="btn kecil" id="simpan-maks">Simpan</button>
+        <p class="hint" id="catatan-owner" style="display:none"></p>
+        <p class="hint" id="pesan-maks"></p>
+      </div>
+
+      <div class="kotak-admin">
+        <h3>Akun Admin</h3>
+        <ul id="daftar-admin"></ul>
+        <div id="form-admin">
+          <input type="text" id="admin-nama" placeholder="Username admin baru">
+          <input type="password" id="admin-pass" placeholder="Password (min. 6 karakter)">
+          <button class="btn kecil" id="btn-tambah-admin">Tambah Admin</button>
+        </div>
+        <p class="hint" id="pesan-admin"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AJAKAN (CTA) ===== -->
+  <section class="bagian" id="tentang">
+    <div class="container">
+      <div class="cta">
+        <div>
+          <h2>Siap menghidupkan foto kamu?</h2>
+          <p>Mulai sekarang dan rasakan perbedaannya!</p>
+        </div>
+        <a class="btn" href="#studio">Mulai Sekarang</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-atas">
+        <div class="logo">
+          <img src="assets/logo.svg" width="40" height="40" alt="logo">
+          <div>Motion<span>Pic</span><small>Buat foto mu menjadi live.</small></div>
+        </div>
+        <div class="footer-menu">
+          <a href="#beranda">Beranda</a>
+          <a href="#fitur">Fitur</a>
+          <a href="#studio">Cara Pakai</a>
+          <a href="#tentang">Tentang</a>
+          <a href="#studio">Bantuan</a>
+        </div>
+        <div class="sosmed">
+  <a href="https://www.tiktok.com/@yanzknjut1" target="_blank" rel="noopener noreferrer">TT</a>
+  <a href="https://www.instagram.com/jlnqwe2" target="_blank" rel="noopener noreferrer">IG</a>
+  <a href="https://github.com/agusyantokerenbangettbehh-hue" target="_blank" rel="noopener noreferrer">GH</a>
+        </div>
+      </div>
+      <div class="footer-bawah">
+        <span>&copy; 2026 MotionPic. Semua hak dilindungi.</span>
+        <span>Dibuat dengan <span class="merah">&hearts;</span> untuk kamu.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== LOGIN ===== -->
+  <div class="modal" id="modal" style="display:none">
+    <div class="modal-isi">
+      <button class="tutup" id="tutup-modal">&times;</button>
+      <h3>Masuk</h3>
+      <p class="hint" id="info-modal"></p>
+      <input type="text" id="login-nama" placeholder="Username" autocomplete="username">
+      <input type="password" id="login-pass" placeholder="Password" autocomplete="current-password">
+      <button class="btn" id="btn-masuk">Masuk</button>
+      <button class="btn garis" id="btn-daftar">Daftar</button>
+      <p class="hint" id="pesan-login"></p>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/studio.js"></script>
+</body>
+</html>
